@@ -12,6 +12,7 @@ Items that touch several repositories are written out in full in one *lead* repo
 ## Soon: robustness and correctness
 
 - [ ] <a id="deploy"></a>**Make deployment reproducible.** Document and automate the deployment (compose files, Traefik, secrets) so a new server can be set up from this repository; let Portainer reuse its existing volume. *(Trello #1029, #751, #1133)*
+- [ ] → Configurable API path prefix; move new firmware to /v3 — see [needforheat-generic-firmware](https://github.com/energiegedrag-nl/needforheat-generic-firmware/blob/main/TODO.md#prefix)
 
 ## Later: features and ideas
 

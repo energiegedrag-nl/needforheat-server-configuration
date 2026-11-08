@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   needforheat-api-v3-tst:
-    image: ghcr.io/energietransitie/needforheat-server-api:main
+    image: ghcr.io/energiegedrag-nl/needforheat-server-api:main
     container_name: needforheat-api-v3-tst
     labels:
-      - traefik.http.routers.needforheat-api-v3-tst.rule=Host(`api.tst.energietransitiewindesheim.nl`) && PathPrefix(`/v3`)
+      - traefik.http.routers.needforheat-api-v3-tst.rule=Host(`api.tst.energiegedrag.nl`) && PathPrefix(`/v3`)
       - traefik.http.routers.needforheat-api-v3-tst.priority=20
       - traefik.http.middlewares.test-stripprefix-v3.stripprefix.prefixes=/v3
       - traefik.http.routers.needforheat-api-v3-tst.tls=true

@@ -1,6 +1,6 @@
 # Manuals
 
-The [NeedForHeat Manual Server](https://github.com/energietransitie/needforheat-manual-server) is an open souce solution that serves the NeedForHeat manuals.
+The [NeedForHeat Manual Server](https://github.com/energiegedrag-nl/needforheat-manual-server) is an open souce solution that serves the NeedForHeat manuals.
 
 Follow the steps in the [deploying section of the main README](../README.md#deploying) to create the stack on Portainer, using the compose path and environment variables below.
 

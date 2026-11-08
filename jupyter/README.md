@@ -42,13 +42,13 @@ For a test server, we recomment to use `tst` and for a production server, `prd`.
 
 Specify the domain that will be used; for a test server we recomend to prefix this with `tst.`, so:
 
-* for a test  server, set e.g. `DOMAIN=tst.energietransitiewindesheim.nl`
-* for a production server, set e.g. `DOMAIN=energietransitiewindesheim.nl`
+* for a test  server, set e.g. `DOMAIN=tst.energiegedrag.nl`
+* for a production server, set e.g. `DOMAIN=energiegedrag.nl`
 
 So, if you  specified  `analysis-one` as the stack name, the fully qualified domains will become:
 
-* test server: `https://analysis-one.tst.energietransitiewindesheim.nl`
-* production server: `https://analysis-one.energietransitiewindesheim.nl`
+* test server: `https://analysis-one.tst.energiegedrag.nl`
+* production server: `https://analysis-one.energiegedrag.nl`
 
 
 ## First time log in

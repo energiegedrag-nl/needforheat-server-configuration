@@ -1,11 +1,11 @@
 # API v3
 
-The [NeedForHeat Server API](https://github.com/energietransitie/needforheat-server-api) is an open souce solution that serves the NeedForHeat REST API to the [NeedForHeat GearUp App](https://github.com/energietransitie/needforheat-gearup-app) and NeedForHeat measurement devices based on NeedForHeat firmware and that used a NeedForHeat database based on MariaDB. 
+The [NeedForHeat Server API](https://github.com/energiegedrag-nl/needforheat-server-api) is an open souce solution that serves the NeedForHeat REST API to the [NeedForHeat GearUp App](https://github.com/energiegedrag-nl/needforheat-gearup-app) and NeedForHeat measurement devices based on NeedForHeat firmware and that used a NeedForHeat database based on MariaDB. 
 
 Follow the steps in the [deploying section of the main README](../README.md#deploying) to create the stack on Portainer, using the compose path and environment variables below.
 
 > **Info**
-> Click [here](https://github.com/energietransitie/needforheat-server-configuration/tree/36ebeff11f1cb7c0d57a48db7ac1254c6b9c2061#api) for environment variables for API v3.
+> Click [here](https://github.com/energiegedrag-nl/needforheat-server-configuration/tree/36ebeff11f1cb7c0d57a48db7ac1254c6b9c2061#api) for environment variables for API v3.
 >
 > The compose path there is `api/v3/<env>/docker-compose.yml`.
 
@@ -39,4 +39,4 @@ Example values: `readonly_researcher:correcthorsebatterystaple@tcp(mariadb_dev:3
 
 This environment variable is used to set the base URL used by the Swagger UI docs.
 
-Example values: `https://api.energietransitiewindesheim.nl/v2` or `https://api.tst.energietransitiewindesheim.nl/v2`
+Example values: `https://api.energiegedrag.nl/v2` or `https://api.tst.energiegedrag.nl/v2`

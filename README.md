@@ -3,9 +3,11 @@
 ![Project Status badge](https://img.shields.io/badge/status-in%20progress-brightgreen)
 ![Version Status Badge](https://img.shields.io/badge/version-stable-brightgreen)
 
-This repository contains configuration scripts and instructions for configuring a NeedForHeat Server, comprising of multiple Docker containers hosted on a Linux server, based on the following technologies: [Traefik proxy](https://traefik.io/traefik/), [Portainer](https://www.portainer.io/), [MariaDB](https://mariadb.org/), [CloudBeaver](https://cloudbeaver.io/), [Duplicati](https://www.duplicati.com/), [NeedForHeat Server API](https://github.com/energietransitie/needforheat-server-api) and [JupyterLab](https://jupyter.org/).
+This repository contains configuration scripts and instructions for configuring a NeedForHeat Server, comprising of multiple Docker containers hosted on a Linux server, based on the following technologies: [Traefik proxy](https://traefik.io/traefik/), [Portainer](https://www.portainer.io/), [MariaDB](https://mariadb.org/), [CloudBeaver](https://cloudbeaver.io/), [Duplicati](https://www.duplicati.com/), [NeedForHeat Server API](https://github.com/energiegedrag-nl/needforheat-server-api) and [JupyterLab](https://jupyter.org/).
 
-NB: Where you read `energietransitiewindesheim.nl` below, you should subsitute your own domain; where you read `etw` below, you should subsitute your own server abbreviation. 
+> **Own deployment.** This repository is maintained by [energiegedrag-nl](https://github.com/energiegedrag-nl) and deployed under `energiegedrag.nl`. To run your own instance, replace `energiegedrag-nl` by your GitHub organisation and `energiegedrag.nl` by your domain (hosts used: `api.<domain>`, `manuals.<domain>`), consistently in configuration and build settings.
+
+NB: Where you read `energiegedrag.nl` below, you should subsitute your own domain; where you read `etw` below, you should subsitute your own server abbreviation. 
 
 <!-- omit from toc -->
 ## Table of contents
@@ -40,19 +42,19 @@ When asked for passphrase, leave that empty.
 
 Now, upload your public key to the server.
 ```shell
-ssh-copy-id -i ~/.ssh/etw root@energietransitiewindesheim.nl
+ssh-copy-id -i ~/.ssh/etw root@energiegedrag.nl
 ```
 
 Login with ssh, without using a password
 ```shell
-ssh -i ~/.ssh/etw root@energietransitiewindesheim.nl
+ssh -i ~/.ssh/etw root@energiegedrag.nl
 ```
 
 Append the following to your `.ssh/config`
 ```text
 Host etw
 User root
-HostName energietransitiewindesheim.nl
+HostName energiegedrag.nl
 IdentityFile ~/.ssh/etw
 ```
 
@@ -64,32 +66,32 @@ ssh etw
 ### Domain setup
 
 We have production (prd) and test (tst) environment, each on a separate server. The production and test environment can be destinguished by their URL.
-- Production URL's: `<service>.energietransitiewindesheim.nl`
-- Test URL's: `<service>.tst.energietransitiewindesheim.nl`
+- Production URL's: `<service>.energiegedrag.nl`
+- Test URL's: `<service>.tst.energiegedrag.nl`
 
-If you wish to copy our configuration, then you will need to find and replace `energietransitiewindesheim.nl` with your own domain in all configuration files.
+If you wish to copy our configuration, then you will need to find and replace `energiegedrag.nl` with your own domain in all configuration files.
 
 The URL's we use for our public services:
 
 | Service                        | Environment |                                         URL |
 | ------------------------------ | ----------- | ------------------------------------------: |
-| [API](./api/README.md)         | production  |         `api.energietransitiewindesheim.nl` |
-| [API](./api/README.md)         | test        |     `api.tst.energietransitiewindesheim.nl` |
-| [Manuals](./manuals/README.md) | production  |     `manuals.energietransitiewindesheim.nl` |
-| [Manuals](./manuals/README.md) | test        | `manuals.tst.energietransitiewindesheim.nl` |
+| [API](./api/README.md)         | production  |         `api.energiegedrag.nl` |
+| [API](./api/README.md)         | test        |     `api.tst.energiegedrag.nl` |
+| [Manuals](./manuals/README.md) | production  |     `manuals.energiegedrag.nl` |
+| [Manuals](./manuals/README.md) | test        | `manuals.tst.energiegedrag.nl` |
 
 The URL's we use for system services:
 
 | Service                                | Environment |                                                 URL |
 | -------------------------------------- | ----------- | --------------------------------------------------: |
-| [Portainer](./portainer/README.md)     | production  |              `docker.energietransitiewindesheim.nl` |
-| [Portainer](./portainer/README.md)     | test        |          `docker.tst.energietransitiewindesheim.nl` |
-| [CloudBeaver](./cloudbeaver/README.md) | production  |                  `db.energietransitiewindesheim.nl` |
-| [CloudBeaver](./cloudbeaver/README.md) | test        |              `db.tst.energietransitiewindesheim.nl` |
-| [Duplicati](./duplicati/README.md)     | production  |              `backup.energietransitiewindesheim.nl` |
-| [Duplicati](./duplicati/README.md)     | test        |          `backup.tst.energietransitiewindesheim.nl` |
-| [JupyterLab](./jupyter/README.md)      | production  |     `analysis-<name>.energietransitiewindesheim.nl` |
-| [JupyterLab](./jupyter/README.md)      | test        | `analysis-<name>.tst.energietransitiewindesheim.nl` |
+| [Portainer](./portainer/README.md)     | production  |              `docker.energiegedrag.nl` |
+| [Portainer](./portainer/README.md)     | test        |          `docker.tst.energiegedrag.nl` |
+| [CloudBeaver](./cloudbeaver/README.md) | production  |                  `db.energiegedrag.nl` |
+| [CloudBeaver](./cloudbeaver/README.md) | test        |              `db.tst.energiegedrag.nl` |
+| [Duplicati](./duplicati/README.md)     | production  |              `backup.energiegedrag.nl` |
+| [Duplicati](./duplicati/README.md)     | test        |          `backup.tst.energiegedrag.nl` |
+| [JupyterLab](./jupyter/README.md)      | production  |     `analysis-<name>.energiegedrag.nl` |
+| [JupyterLab](./jupyter/README.md)      | test        | `analysis-<name>.tst.energiegedrag.nl` |
 
 ## Deploying
 
@@ -119,7 +121,7 @@ This setup has to be done with SSH access to the server. During these steps, por
     ```bash
     docker restart portainer
     ```
-8. Portainer is now available at `docker.energietransitiewindesheim.nl`.
+8. Portainer is now available at `docker.energiegedrag.nl`.
 
 ### Deploying stacks with Portainer
 
@@ -133,7 +135,7 @@ Add a new stack according to the following steps:
 4. Select `git repository` as the build method.
 5. Set the `repository URL` to: 
     ```
-    https://github.com/energietransitie/needforheat-server-configuration
+    https://github.com/energiegedrag-nl/needforheat-server-configuration
     ```
 6. Set the `repository reference` to:
     ```
@@ -149,7 +151,7 @@ Add a new stack according to the following steps:
 
 When a `docker-compose.yml` for a stack is changed, the new configuration can be retrieved by following the steps below:
 
-1. Go to `Stacks` in [portainer](https://docker.energietransitiewindesheim.nl).
+1. Go to `Stacks` in [portainer](https://docker.energiegedrag.nl).
 2. Click on the stack you want to update.
 3. You can change environment variables if you want.
 4. Click on `Pull and redeploy` to retrieve the configuration from the main branch and update the container(s).
@@ -209,6 +211,6 @@ We use and gratefully acknowlegde the efforts of the makers of the following tec
 * [MariaDB](https://github.com/MariaDB/server), licensed under [GNU GPL-2.0](https://github.com/MariaDB/server/blob/10.9/COPYING)
 * [CloudBeaver](https://github.com/dbeaver/cloudbeaver), by DBeaver Corp, licensed under [Apache-2.0](https://github.com/dbeaver/cloudbeaver/blob/devel/LICENSE))
 * [Duplicati](https://github.com/duplicati/duplicati), by duplicati.com, licensed under [LGPL-2.1](https://github.com/duplicati/duplicati/blob/master/LICENSE.txt)
-* [NeedForHeat Server API](https://github.com/energietransitie/needforheat-server-api), by Research group Energy Transition, Windesheim University of 
-Applied Sciences, licensed under [Apache-2.0](https://github.com/energietransitie/needforheat-server-api/blob/main/LICENSE)
+* [NeedForHeat Server API](https://github.com/energiegedrag-nl/needforheat-server-api), by Research group Energy Transition, Windesheim University of 
+Applied Sciences, licensed under [Apache-2.0](https://github.com/energiegedrag-nl/needforheat-server-api/blob/main/LICENSE)
 * [JupyterLab](https://github.com/jupyterlab/jupyterlab), by Project Jupyter Contributors, licensed under [this license](https://github.com/jupyterlab/jupyterlab/blob/master/LICENSE)

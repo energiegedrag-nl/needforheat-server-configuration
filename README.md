@@ -88,8 +88,6 @@ The URL's we use for system services:
 | [Portainer](./portainer/README.md)     | test        |          `docker.tst.energiegedrag.nl` |
 | [CloudBeaver](./cloudbeaver/README.md) | production  |                  `db.energiegedrag.nl` |
 | [CloudBeaver](./cloudbeaver/README.md) | test        |              `db.tst.energiegedrag.nl` |
-| [Cockpit](./cockpit/README.md)         | production  |             `cockpit.energiegedrag.nl` |
-| [Cockpit](./cockpit/README.md)         | test        |         `cockpit.tst.energiegedrag.nl` |
 | [Duplicati](./duplicati/README.md)     | production  |              `backup.energiegedrag.nl` |
 | [Duplicati](./duplicati/README.md)     | test        |          `backup.tst.energiegedrag.nl` |
 | [JupyterLab](./jupyter/README.md)      | production  |     `analysis-<name>.energiegedrag.nl` |

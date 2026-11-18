@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   needforheat-api-v2-prd:
-    image: ghcr.io/energiegedrag-nl/needforheat-server-api:2.6.0 # A fixed release; change it to update.
+    image: ghcr.io/energiegedrag-nl/needforheat-server-api:2.7.0 # A fixed release; change it to update.
     container_name: needforheat-api-v3-prd
     labels:
       - traefik.http.routers.needforheat-api-v3-prd.rule=Host(`api.energiegedrag.nl`) && PathPrefix(`/v3`) && !PathPrefix(`/v3/admin`)
@@ -15,10 +15,16 @@ services:
       - traefik.http.middlewares.prod-ratelimit.ratelimit.burst=50
     networks:
       - web
+    ports:
+      # Admin routes (/admin) for the Cockpit: only on a private address, see api/README.md#admin-access.
+      # Default 127.0.0.1 (reach it through an SSH tunnel); a WireGuard or LAN address works too. Never 0.0.0.0.
+      - ${ADMIN_BIND:-127.0.0.1}:18081:8081
     environment:
       - NFH_DSN=${NFH_DSN}
       - NFH_BASE_URL=${NFH_BASE_URL}
       - NFH_DOWNLOAD_TIME=${NFH_DOWNLOAD_TIME}
+      - NFH_ADMIN_ADDR=:8081
+      - NFH_TIMEZONE=${NFH_TIMEZONE:-Europe/Amsterdam}
     restart: unless-stopped
     volumes:
       - data:/data

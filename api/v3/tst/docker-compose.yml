@@ -15,15 +15,11 @@ services:
       - traefik.http.middlewares.test-ratelimit.ratelimit.burst=50
     networks:
       - web
-    ports:
-      # Admin routes (/admin) for the Cockpit: only on a private address, see api/README.md#admin-access.
-      # Default 127.0.0.1 (reach it through an SSH tunnel); a WireGuard or LAN address works too. Never 0.0.0.0.
-      - ${ADMIN_BIND:-127.0.0.1}:18081:8081
     environment:
       - NFH_DSN=${NFH_DSN}
       - NFH_BASE_URL=${NFH_BASE_URL}
       - NFH_DOWNLOAD_TIME=${NFH_DOWNLOAD_TIME}
-      - NFH_ADMIN_ADDR=:8081
+      - NFH_ADMIN_ADDR=:8082 # Routes that need an admin token: only for the Cockpit stack on the network "web"; not published.
       - NFH_TIMEZONE=${NFH_TIMEZONE:-Europe/Amsterdam}
     restart: unless-stopped
     volumes:

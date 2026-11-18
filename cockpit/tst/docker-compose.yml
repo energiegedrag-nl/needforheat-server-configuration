@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  cockpit-tst:
+    image: ghcr.io/energiegedrag-nl/energiegedrag-cockpit:main
+    container_name: cockpit-tst
+    labels:
+      - traefik.http.routers.cockpit-tst.rule=Host(`cockpit.tst.energiegedrag.nl`)
+      - traefik.http.routers.cockpit-tst.tls=true
+      - traefik.http.routers.cockpit-tst.tls.certresolver=lets-encrypt
+      - traefik.http.services.cockpit-tst.loadbalancer.server.port=80
+      # Only from the addresses in IP_Whitelist (the WireGuard subnet, the LAN): the Cockpit handles admin tokens.
+      - traefik.http.routers.cockpit-tst.middlewares=cockpit-tst-ipwhitelist,cockpit-tst-ratelimit
+      - traefik.http.middlewares.cockpit-tst-ipwhitelist.ipwhitelist.sourcerange= $IP_Whitelist
+      - traefik.http.middlewares.cockpit-tst-ratelimit.ratelimit.average=20
+      - traefik.http.middlewares.cockpit-tst-ratelimit.ratelimit.burst=50
+    networks:
+      - web
+    environment:
+      # The admin port of the API container of the same environment, on the Docker network "web". This port is not
+      # published on the host: the Cockpit is the only way in.
+      - API_UPSTREAM=http://needforheat-api-v3-tst:8082
+    volumes:
+      - firmware:/usr/share/nginx/html/firmware:ro
+    restart: unless-stopped
+
+  # Fetches and checks firmware releases for the flash station every 6 hours. Needs internet, no incoming traffic.
+  cockpit-mirror-tst:
+    image: ghcr.io/energiegedrag-nl/energiegedrag-cockpit-mirror:main
+    container_name: cockpit-mirror-tst
+    labels:
+      - traefik.enable=false
+    volumes:
+      - firmware:/firmware
+    restart: unless-stopped
+
+networks:
+  web:
+    external: true
+
+volumes:
+  firmware: {}

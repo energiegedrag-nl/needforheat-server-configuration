@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   needforheat-api-v2-prd:
-    image: ghcr.io/energiegedrag-nl/needforheat-server-api:latest # Latest is always the latest stable version.
+    image: ghcr.io/energiegedrag-nl/needforheat-server-api:2.6.0 # A fixed release; change it to update.
     container_name: needforheat-api-v3-prd
     labels:
-      - traefik.http.routers.needforheat-api-v3-prd.rule=Host(`api.energiegedrag.nl`) && PathPrefix(`/v3`)
+      - traefik.http.routers.needforheat-api-v3-prd.rule=Host(`api.energiegedrag.nl`) && PathPrefix(`/v3`) && !PathPrefix(`/v3/admin`)
       - traefik.http.routers.needforheat-api-v3-prd.priority=20
       - traefik.http.middlewares.prod-stripprefix-v3.stripprefix.prefixes=/v3
       - traefik.http.routers.needforheat-api-v3-prd.tls=true

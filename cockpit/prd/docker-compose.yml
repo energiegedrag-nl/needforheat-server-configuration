@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  cockpit-prd:
+    image: ghcr.io/energiegedrag-nl/energiegedrag-cockpit:main
+    container_name: cockpit-prd
+    labels:
+      - traefik.http.routers.cockpit-prd.rule=Host(`cockpit.energiegedrag.nl`)
+      - traefik.http.routers.cockpit-prd.tls=true
+      - traefik.http.routers.cockpit-prd.tls.certresolver=lets-encrypt
+      - traefik.http.services.cockpit-prd.loadbalancer.server.port=80
+      # Only from the addresses in IP_Whitelist (office, VPN): the Cockpit handles admin tokens.
+      - traefik.http.routers.cockpit-prd.middlewares=cockpit-prd-ipwhitelist
+      - traefik.http.middlewares.cockpit-prd-ipwhitelist.ipwhitelist.sourcerange= $IP_Whitelist
+    networks:
+      - web
+    environment:
+      # The API container of the same environment, on the Docker network "web" (no /v3 prefix inside the network).
+      - API_UPSTREAM=http://needforheat-api-v3-prd:8080
+    volumes:
+      - firmware:/usr/share/nginx/html/firmware:ro
+    restart: unless-stopped
+
+  # Fetches and checks firmware releases for the flash station every 6 hours. Needs internet, no incoming traffic.
+  cockpit-mirror-prd:
+    image: ghcr.io/energiegedrag-nl/energiegedrag-cockpit-mirror:main
+    container_name: cockpit-mirror-prd
+    labels:
+      - traefik.enable=false
+    volumes:
+      - firmware:/firmware
+    restart: unless-stopped
+
+networks:
+  web:
+    external: true
+
+volumes:
+  firmware: {}

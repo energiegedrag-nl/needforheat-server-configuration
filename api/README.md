@@ -39,4 +39,12 @@ Example values: `readonly_researcher:correcthorsebatterystaple@tcp(mariadb_dev:3
 
 This environment variable is used to set the base URL used by the Swagger UI docs.
 
-Example values: `https://api.energiegedrag.nl/v2` or `https://api.tst.energiegedrag.nl/v2`
+Example values: `https://api.energiegedrag.nl/v3` or `https://api.tst.energiegedrag.nl/v3`
+
+### `NFH_TIMEZONE`
+
+Time zone whose offset from UTC the API sends to devices with each upload, for the time on their screen (API 2.7.0 or later). Default: `Europe/Amsterdam`.
+
+## Admin routes
+
+The API serves every route that needs an admin token (creating apps, campaigns, accounts, device types and data sources, and `/admin` for the [Cockpit](../cockpit/README.md)) on a separate port, 8082 (API 2.7.0 or later). That port is not published on the host: only the Cockpit stack reaches it, over the Docker network `web`. The public port 8080 has none of these routes, and the Traefik rule also excludes `/v3/admin`. For scripts with an admin token, use `https://cockpit.<domain>/api/...` (from WireGuard or the LAN).

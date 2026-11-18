@@ -4,7 +4,7 @@ services:
     image: ghcr.io/energiegedrag-nl/needforheat-server-api:main
     container_name: needforheat-api-v3-tst
     labels:
-      - traefik.http.routers.needforheat-api-v3-tst.rule=Host(`api.tst.energiegedrag.nl`) && PathPrefix(`/v3`)
+      - traefik.http.routers.needforheat-api-v3-tst.rule=Host(`api.tst.energiegedrag.nl`) && PathPrefix(`/v3`) && !PathPrefix(`/v3/admin`)
       - traefik.http.routers.needforheat-api-v3-tst.priority=20
       - traefik.http.middlewares.test-stripprefix-v3.stripprefix.prefixes=/v3
       - traefik.http.routers.needforheat-api-v3-tst.tls=true
@@ -19,6 +19,8 @@ services:
       - NFH_DSN=${NFH_DSN}
       - NFH_BASE_URL=${NFH_BASE_URL}
       - NFH_DOWNLOAD_TIME=${NFH_DOWNLOAD_TIME}
+      - NFH_ADMIN_ADDR=:8082 # Routes that need an admin token: only for the Cockpit stack on the network "web"; not published.
+      - NFH_TIMEZONE=${NFH_TIMEZONE:-Europe/Amsterdam}
     restart: unless-stopped
     volumes:
       - data:/data
